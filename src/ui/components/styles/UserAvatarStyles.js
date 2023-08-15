@@ -21,6 +21,7 @@ const useStyles = styled((theme) => ({
   },
   uploadButton: {
     marginTop: theme.spacing(2),
+    margin: theme.spacing(2)
   },
   avatarContainer: {
     position: 'relative',
@@ -28,7 +29,7 @@ const useStyles = styled((theme) => ({
     textAlign: 'center', // Center inline elements
   },
   cameraIcon: {
-    position: 'absolute',
+    position: 'relative',
     bottom: '0',
     right: '0',
     backgroundColor: theme.palette.background.paper,

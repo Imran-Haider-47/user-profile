@@ -1,3 +1,4 @@
+// UserProfilePage.js
 import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import AvatarUploader from '../../shared/AvatarUploader';
@@ -9,11 +10,13 @@ import UserProfileLayout from '../../ui/layouts/UserProfileLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserProfile, updateFullName, updateAvatar } from './UserProfileSlice';
 
-import sampleImage from '../../assets/images/imran.jpg';
+import sampleImage from '../../../public/images/sample_img.png';
 
 const UserProfilePage = () => {
   const userProfile = useSelector(selectUserProfile);
   const dispatch = useDispatch();
+  const [avatarUrl, setAvatarUrl] = useState(sampleImage);
+  const [showCameraIcon, setShowCameraIcon] = useState(true); // Add state for showing camera icon
 
   const handleFullNameSave = (newFullName) => {
     dispatch(updateFullName(newFullName));
@@ -22,18 +25,12 @@ const UserProfilePage = () => {
   const handleAvatarUpload = async (newAvatar) => {
     try {
       await dispatch(updateAvatar(newAvatar));
-      // Set the avatarUrl to the uploaded image URL
       setAvatarUrl(newAvatar);
+      setShowCameraIcon(true); // Show camera icon after uploading
     } catch (error) {
       console.error('Error uploading avatar:', error);
     }
   };
-
-  const onSaveChanges = () => {
-    alert('Your changes have been saved!');
-  };
-
-  const [avatarUrl, setAvatarUrl] = useState(sampleImage);
 
   return (
     <div
@@ -48,20 +45,31 @@ const UserProfilePage = () => {
           <Typography variant="h4" align="center">
             User Profile
           </Typography>
-          <img src={avatarUrl} alt="User Avatar" style={{
+          <img
+            src={avatarUrl}
+            alt="User Avatar"
+            style={{
               width: '100%',
               height: '100%',
               maxWidth: '200px',
               maxHeight: '200px',
               borderRadius: '50%',
-            }} />
+            }}
+          />
 
-          <AvatarUploader currentAvatar={userProfile.avatar} onUpload={handleAvatarUpload} />
+          <AvatarUploader
+            currentAvatar={userProfile.avatar}
+            onUpload={handleAvatarUpload}
+            avatarUrl={avatarUrl}
+            setAvatarUrl={setAvatarUrl}
+            showCameraIcon={showCameraIcon} // Pass the showCameraIcon prop
+            setShowCameraIcon={setShowCameraIcon} // Pass the setShowCameraIcon prop
+          />
 
           <UserFullName fullName={userProfile.fullName} onSave={handleFullNameSave} />
           <UserEmail email={userProfile.email} />
           <UserJoiningDate initialDate={userProfile.joiningDate.toISOString()} />
-          <SaveButton onClick={onSaveChanges} />
+          <SaveButton />
         </Box>
       </UserProfileLayout>
     </div>
