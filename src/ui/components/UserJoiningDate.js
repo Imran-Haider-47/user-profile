@@ -1,40 +1,28 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, TextField, Button } from '@mui/material';
-import { DatePicker } from '@mui/lab';
+import React from 'react';
+import { Card, CardContent, CardHeader } from '@mui/material';
 import useStyles from './styles/UserJoiningDateStyles';
 
-const UserJoiningDate = ({ initialDate, onSave }) => {
+const UserJoiningDate = ({ initialDate }) => {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState(initialDate);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  // Convert the initial date string to a Date object
+  const dateObject = new Date(initialDate);
+
+  // Options for formatting the date
+  const options = {
+    year: 'numeric',
+    month: 'long', // Use 'short' for abbreviated month names
+    day: 'numeric',
   };
 
-  const handleSaveClick = () => {
-    onSave(selectedDate);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    handleSaveClick(); 
-  };
+  // Format the date using toLocaleDateString
+  const formattedDate = dateObject.toLocaleDateString('en-US', options);
 
   return (
     <Card className={classes.joiningDateContainer}>
       <CardHeader title="Joining Date" />
       <CardContent>
-        <form onSubmit={handleSubmit}>
-          <DatePicker
-            label="Select Joining Date"
-            value={selectedDate}
-            onChange={handleDateChange}
-            renderInput={(params) => <TextField {...params} />}
-          />
-          <Button variant="outlined" color="primary" type="submit" className={classes.button}>
-            Save
-          </Button>
-        </form>
+        <p>{formattedDate}</p>
       </CardContent>
     </Card>
   );

@@ -6,22 +6,37 @@ import useStyles from './AvatarUploaderStyles'; // Import styles from AvatarUplo
 const AvatarUploader = ({ currentAvatar, onUpload }) => {
   const classes = useStyles(); // Use the imported styles
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [uploadError, setUploadError] = useState(null);
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setSelectedAvatar(e.target.result);
-      };
-      reader.readAsDataURL(file);
+      const fileType = file.type;
+      if (fileType === 'image/jpeg' || fileType === 'image/png') {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setSelectedAvatar(e.target.result);
+          setUploadError('');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setSelectedAvatar(null);
+        setUploadError('Please select a valid image file (JPEG or PNG).');
+      }
     }
   };
+  
 
   const handleUploadClick = () => {
+    if (!selectedAvatar) {
+      return; // No file selected, do nothing
+    }
+  
     if (selectedAvatar) {
       onUpload(selectedAvatar);
+      alert("Image Uploaded");
     }
+    setUploadError(null);
   };
 
   return (
@@ -32,7 +47,7 @@ const AvatarUploader = ({ currentAvatar, onUpload }) => {
         className={classes.avatar}
       />
       <input
-        accept="image/*"
+        accept=".png, .jpeg, .jpg"
         id="avatar-upload"
         type="file"
         onChange={handleAvatarChange}
@@ -53,13 +68,18 @@ const AvatarUploader = ({ currentAvatar, onUpload }) => {
       </Typography>
       <Button
         variant="contained"
-        color="primary"
+        color={uploadError ? 'error' : 'primary'} 
         onClick={handleUploadClick}
         disabled={!selectedAvatar}
         className={classes.uploadButton}
       >
         Upload
       </Button>
+      {uploadError && (
+        <Typography variant="body2" color="error">
+          {uploadError}
+        </Typography>
+      )}
     </div>
   );
 };

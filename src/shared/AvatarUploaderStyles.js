@@ -5,17 +5,21 @@ const useStyles = styled((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center', 
     gap: theme.spacing(2),
   },
   avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(20),
+    height: theme.spacing(20),
   },
   input: {
-    display: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   uploadButton: {
     marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
