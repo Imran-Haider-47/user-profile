@@ -1,5 +1,3 @@
-//our-domain/
-const HomePage=()=>{
-    return<h1>The Home Page.</h1>
-}
-export default HomePage;
+import UserProfilePage from '../features/UserProfile/UserProfile';
+
+export default UserProfilePage;

@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   fullNameContainer: {
     maxWidth: 400,
     margin: '0 auto',

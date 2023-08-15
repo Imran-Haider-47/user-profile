@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Card, CardContent, CardHeader } from '@mui/material';
-import useStyles from './UserFullNameStyles';
+import useStyles from './styles/UserFullNameStyles';
 
 const UserFullName = ({ fullName, onSave }) => {
   const classes = useStyles();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
-import useStyles from './UserEmailStyles';
+import useStyles from './styles/UserEmailStyles';
 
 const UserEmail = ({ email }) => {
   const classes = useStyles();
