@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Card, CardContent, CardHeader, CircularProgress } from '@mui/material';
 import AvatarUploader from '../shared/AvatarUploader';
-import useStyles from './UserAvatarStyles';
+import useStyles from './styles/UserAvatarStyles';
 
 const UserAvatar = ({ avatarUrl, onAvatarChange }) => {
   const classes = useStyles();
