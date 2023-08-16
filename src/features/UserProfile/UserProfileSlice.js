@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import UserProfileAPI from './UserProfileAPI';
 
 const initialState = {
-  fullName: 'John Doe',
-  email: 'johndoe@example.com',
+  fullName: 'Imran',
+  email: 'testing@gmail.com',
   avatar: '/default-avatar.png',
-  joiningDate: '2023-01-01',
+  joiningDate: new Date('2023-01-01'),
 };
 
 const userProfileSlice = createSlice({

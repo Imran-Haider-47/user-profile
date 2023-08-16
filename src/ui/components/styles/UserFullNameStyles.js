@@ -5,6 +5,7 @@ const useStyles = styled((theme) => ({
     maxWidth: 400,
     margin: '0 auto',
     marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -15,6 +16,7 @@ const useStyles = styled((theme) => ({
   },
   button: {
     alignSelf: 'flex-end',
+    marginTop: theme.spacing(4), // Add margin above the button
   },
 }));
 

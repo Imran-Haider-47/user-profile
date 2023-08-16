@@ -12,7 +12,7 @@ const MainLayout = ({ children }) => {
           <Typography variant="h6">User Profile Page</Typography>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" style={{ marginTop: '2rem' }}>
+      <Container maxWidth="lg" style={{ marginTop: '1rem', backgroundColor:'orange' }}>
         {children}
       </Container>
     </div>
