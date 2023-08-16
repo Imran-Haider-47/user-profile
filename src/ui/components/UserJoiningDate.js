@@ -19,12 +19,27 @@ const UserJoiningDate = ({ initialDate }) => {
   const formattedDate = dateObject.toLocaleDateString('en-US', options);
 
   return (
-    <Card className={classes.joiningDateContainer}>
+    <div
+    style={{
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      minHeight: '10vh',
+      padding: '5px 10px 10px 10px',
+      borderRadius: '25px 25px'
+    }}
+  >
+    <Card className={classes.joiningDateContainer}
+    style={{
+      backgroundColor: 'lightcyan',
+      minHeight: '10vh',
+      borderRadius: '30px'
+    }}
+    >
       <CardHeader title="Joining Date" />
       <CardContent>
         <p>{formattedDate}</p>
       </CardContent>
     </Card>
+    </div>
   );
 };
 
