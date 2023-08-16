@@ -1,4 +1,3 @@
-// UserProfilePage.js
 import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import AvatarUploader from '../../shared/AvatarUploader';
@@ -10,13 +9,17 @@ import UserProfileLayout from '../../ui/layouts/UserProfileLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserProfile, updateFullName, updateAvatar } from './UserProfileSlice';
 
-import sampleImage from '../../../public/images/sample_img.png';
+// Import components from @mui/material for custom alert
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import { green } from '@mui/material/colors'; // Import green color from MUI colors
 
 const UserProfilePage = () => {
   const userProfile = useSelector(selectUserProfile);
   const dispatch = useDispatch();
-  const [avatarUrl, setAvatarUrl] = useState(sampleImage);
-  const [showCameraIcon, setShowCameraIcon] = useState(true); // Add state for showing camera icon
 
   const handleFullNameSave = (newFullName) => {
     dispatch(updateFullName(newFullName));
@@ -26,10 +29,31 @@ const UserProfilePage = () => {
     try {
       await dispatch(updateAvatar(newAvatar));
       setAvatarUrl(newAvatar);
-      setShowCameraIcon(true); // Show camera icon after uploading
+      setShowCameraIcon(true);
+      setShowChooseButton(false);
     } catch (error) {
       console.error('Error uploading avatar:', error);
     }
+  };
+
+  const initialAvatarUrl = '/images/sample_img.png';
+  const [avatarUrl, setAvatarUrl] = useState(initialAvatarUrl);
+  const [showCameraIcon, setShowCameraIcon] = useState(true);
+  const [showChooseButton, setShowChooseButton] = useState(false);
+
+  // State for custom alert dialog
+  const [showAlert, setShowAlert] = useState(false);
+
+  // Function to open the custom alert dialog
+  const openAlert = () => {
+    setShowAlert(true);
+  };
+
+  // Function to handle "Save Changes" button click
+  const handleSaveChanges = () => {
+    setShowCameraIcon(true);
+    setShowChooseButton(false);
+    openAlert();
   };
 
   return (
@@ -62,16 +86,31 @@ const UserProfilePage = () => {
             onUpload={handleAvatarUpload}
             avatarUrl={avatarUrl}
             setAvatarUrl={setAvatarUrl}
-            showCameraIcon={showCameraIcon} // Pass the showCameraIcon prop
-            setShowCameraIcon={setShowCameraIcon} // Pass the setShowCameraIcon prop
+            showCameraIcon={showCameraIcon}
+            showChooseButton={showChooseButton}
+            setShowCameraIcon={setShowCameraIcon}
+            setShowChooseButton={setShowChooseButton}
           />
 
           <UserFullName fullName={userProfile.fullName} onSave={handleFullNameSave} />
           <UserEmail email={userProfile.email} />
           <UserJoiningDate initialDate={userProfile.joiningDate.toISOString()} />
-          <SaveButton />
+          <SaveButton onClick={handleSaveChanges} />
         </Box>
       </UserProfileLayout>
+
+      {/* Custom alert dialog */}
+      <Dialog open={showAlert} onClose={() => setShowAlert(false)} >
+        <DialogTitle sx={{ backgroundColor: green[500], color: '#fff' }}>Changes Saved!</DialogTitle>
+        <DialogContent sx={{ backgroundColor: green[100] }}>
+          <Typography>Your changes have been successfully saved.</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowAlert(false)} style={{ backgroundColor: green[200] }}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
