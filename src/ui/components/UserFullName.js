@@ -26,7 +26,21 @@ const UserFullName = ({ fullName, onSave }) => {
   };
 
   return (
-    <Card className={classes.fullNameContainer}>
+    <div
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        minHeight: '10vh',
+        padding: '10px 10px 5px 10px',
+        borderRadius: '25px 25px'
+      }}
+    >
+    <Card className={classes.fullNameContainer} 
+    style={{
+        backgroundColor: 'lightcyan' ,
+        minHeight: '10vh',
+        padding: '10px',
+        borderRadius: '30px'
+      }}>
       <CardHeader title="Full Name" />
       <CardContent>
         {isEditing ? (
@@ -55,6 +69,7 @@ const UserFullName = ({ fullName, onSave }) => {
         )}
       </CardContent>
     </Card>
+    </div>
   );
 };
 

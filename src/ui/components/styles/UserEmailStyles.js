@@ -8,6 +8,9 @@ const useStyles = styled((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: 'lightpink', // Add your desired background color here
+    padding: theme.spacing(2), // Add padding for spacing
+    
   },
 }));
 

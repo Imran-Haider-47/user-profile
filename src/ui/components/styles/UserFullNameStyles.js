@@ -5,7 +5,7 @@ const useStyles = styled((theme) => ({
     maxWidth: 400,
     margin: '0 auto',
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -16,7 +16,12 @@ const useStyles = styled((theme) => ({
   },
   button: {
     alignSelf: 'flex-end',
-    marginTop: theme.spacing(4), // Add margin above the button
+    marginTop: theme.spacing(2), // Adjust the margin value as needed
+    backgroundColor: 'lightgray', // Set background color to lightgray
+    color: 'white', // Set text color to white
+    '&:hover': {
+      backgroundColor: 'darkgray', // Change background color on hover if desired
+    },
   },
 }));
 
